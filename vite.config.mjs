@@ -12,7 +12,7 @@ export default defineConfig(() => {
     css: {
       postcss: {
         plugins: [
-          autoprefixer({}), // add options if needed
+          autoprefixer({}),
         ],
       },
     },
@@ -42,7 +42,11 @@ export default defineConfig(() => {
     server: {
       port: 3000,
       proxy: {
-        // https://vitejs.dev/config/server-options.html
+        '/api': {
+          target: 'https://60swqrng-8080.asse.devtunnels.ms',
+          changeOrigin: true,
+          secure: false, // penting agar bypass SSL DevTunnel
+        },
       },
     },
   }

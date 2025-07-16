@@ -22,7 +22,7 @@ const Tables = () => {
         <DocsComponents href="components/table/" />
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>React Table</strong> <small>Basic example</small>
+            <strong>React</strong> <small>Basic example</small>
           </CCardHeader>
           <CCardBody>
             <p className="text-body-secondary small">
@@ -34,8 +34,8 @@ const Tables = () => {
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Class</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Nama</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Alamat</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
