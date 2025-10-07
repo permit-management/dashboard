@@ -87,6 +87,11 @@ const _nav = [
         name: 'RegisterForm',
         to: '/RegisterForm',
       },
+      {
+        component: CNavItem,
+        name: 'WellcomeForm',
+        to: '/WellcomeForm',
+      },
       
     ],
   },

@@ -77,26 +77,37 @@ const Role = () => {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-              {!loading && roles.length === 0 ? (
-                <tr>
-                  <td colSpan="7" className="text-center">
-                    Tidak ada data.
-                  </td>
-                </tr>
-              ) : (
-                roles.map((roles) => (
-                  <tr key={roles.id}>
-                    <td>{roles.role_id}</td>
-                    <td>{roles.role_name}</td>
-                    <td>
-                      <button className="btn btn-link text-primary p-0 me-2">Detail</button>
-                      <button className="btn btn-link text-primary p-0">Edit</button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
+<tbody>
+ {!loading && roles.length === 0 ? (
+  <tr>
+   <td colSpan="7" className="text-center">
+    Tidak ada data.
+   </td>
+  </tr>
+ ) : (
+  roles.map((role) => (
+   <tr key={role.role_id}>
+    <td>{role.role_id}</td>
+    <td>{role.role_name}</td>
+    <td>
+     <Link to={`/DetailRole/${role.id}`}>
+      <button className="btn btn-link text-primary p-0 me-2">Detail</button>
+     </Link>
+     <Link to={`/EditRole/${role.id}`}>
+      <button className="btn btn-link text-primary p-0">Edit</button>
+     </Link>
+    </td>
+   </tr>
+  )) 
+ )}
+ {error && (
+  <tr>
+   <td colSpan="7" className="text-center text-danger">
+    {error}
+   </td>
+  </tr>
+ )}
+</tbody>
           </Table>
         </CCardBody>
       </CCard>

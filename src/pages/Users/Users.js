@@ -91,15 +91,19 @@ const Users = () => {
               ) : (
                 users.map((user) => (
                   <tr key={user.id}>
-                    <td>{user.id}</td>
+                    <td>{user.user_id}</td>
                     <td>{user.name}</td>
                     <td>{user.number_phone}</td>
                     <td>{user.email}</td>
                     <td>{user.departement_id}</td>
                     <td>{user.role_id}</td>
                     <td>
-                      <button className="btn btn-link text-primary p-0 me-2">Detail</button>
-                      <button className="btn btn-link text-primary p-0">Edit</button>
+                      <Link to={`/DetailUsers/${user.id}`}>
+                        <button className="btn btn-link text-primary p-0 me-2">Detail</button>
+                      </Link>
+                      <Link to={`/EditUsers/${user.id}`}>
+                        <button className="btn btn-link text-primary p-0">Edit</button>
+                      </Link>
                     </td>
                   </tr>
                 ))

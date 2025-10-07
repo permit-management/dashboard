@@ -60,8 +60,8 @@ const TambahDepartment = () => {
   }
 
   return (
-    <CContainer className="py-4">
-      <h5 className="fw-bold mb-1">Create new department</h5>
+     <CContainer className="py-4">
+     <h5 className="fw-bold mb-1">Create new department</h5>
       <p className="text-medium-emphasis mb-4">
         On this page, you have the ability to create new department
       </p>
