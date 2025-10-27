@@ -8,6 +8,9 @@ import DocsComponents from './DocsComponents'
 import DocsIcons from './DocsIcons'
 import DocsLink from './DocsLink'
 import DocsExample from './DocsExample'
+import ProtectedRoute from '../auth/ProtectedRoute'
+import PublicRoute from '../auth/PublicRoute'
+import AuthGuard from './AuthGuard'
 
 export {
   AppBreadcrumb,
@@ -20,4 +23,7 @@ export {
   DocsIcons,
   DocsLink,
   DocsExample,
+  ProtectedRoute,
+  PublicRoute,
+  AuthGuard,
 }

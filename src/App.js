@@ -8,6 +8,11 @@ import './scss/style.scss'
 // We use those styles to show code examples, you should remove them in your application.
 import './scss/examples.scss'
 
+// Auth Provider and Route Components
+import { AuthProvider } from './contexts/AuthContext'
+import ProtectedRoute from './auth/ProtectedRoute'
+import PublicRoute from './auth/PublicRoute'
+
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
@@ -38,22 +43,73 @@ const App = () => {
 
   return (
     <HashRouter>
-      <Suspense
-        fallback={
-          <div className="pt-3 text-center">
-            <CSpinner color="primary" variant="grow" />
-          </div>
-        }
-      >
-        <Routes>
-          <Route exact path="/login" name="Login Page" element={<Login />} />
-          <Route exact path="/register" name="Register Page" element={<Register />} />
-          <Route exact path='/LoginForm' name='LoginForm' element={<LoginForm />} />
-          <Route exact path='/RegisterForm' name='RegisterForm' element={<RegisterForm />} />
-          <Route exact path="/500" name="Page 500" element={<Page500 />} />
-          <Route path="*" name="Home" element={<DefaultLayout />} />
-        </Routes>
-      </Suspense>
+      <AuthProvider>
+        <Suspense
+          fallback={
+            <div className="pt-3 text-center">
+              <CSpinner color="primary" variant="grow" />
+            </div>
+          }
+        >
+          <Routes>
+            {/* Public routes - redirect to dashboard if authenticated */}
+            <Route
+              exact
+              path="/login"
+              name="Login Page"
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            />
+            <Route
+              exact
+              path="/register"
+              name="Register Page"
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              }
+            />
+            <Route
+              exact
+              path='/LoginForm'
+              name='LoginForm'
+              element={
+                <PublicRoute>
+                  <LoginForm />
+                </PublicRoute>
+              }
+            />
+            <Route
+              exact
+              path='/RegisterForm'
+              name='RegisterForm'
+              element={
+                <PublicRoute>
+                  <RegisterForm />
+                </PublicRoute>
+              }
+            />
+
+            {/* Error page - accessible to all */}
+            <Route exact path="/500" name="Page 500" element={<Page500 />} />
+
+            {/* Protected routes - require authentication */}
+            <Route
+              path="*"
+              name="Home"
+              element={
+                <ProtectedRoute>
+                  <DefaultLayout />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
+      </AuthProvider>
     </HashRouter>
   )
 }

@@ -23,21 +23,23 @@ import {
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext'
 
 import avatar8 from './../../assets/images/avatars/8.jpg'
 
 const AppHeaderDropdown = () => {
   const navigate = useNavigate()
+  const { logout, user } = useAuth()
 
   const handleLogout = () => {
-    // 1. Hapus token & data lain
-    localStorage.removeItem('token')
-    // 2. Redirect ke halaman login
+    // Use the logout function from AuthContext which clears localStorage and updates state
+    logout()
+    // Redirect to login page
     navigate('/LoginForm', { replace: true })
   }
 
   return (
-   <CDropdown variant="nav-item">
+    <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0 pe-0" caret={false}>
         <CAvatar src={avatar8} size="md" />
       </CDropdownToggle>
