@@ -43,7 +43,7 @@ export default defineConfig(() => {
       port: 3000,
       proxy: {
         '/api': {
-          target: 'https://60swqrng-8080.asse.devtunnels.ms',
+          target: 'https://60swqrng-8080.asse.devtunnels.ms/api',
           changeOrigin: true,
           secure: false, // penting agar bypass SSL DevTunnel
         },

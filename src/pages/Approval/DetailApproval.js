@@ -13,7 +13,7 @@ import {
   CSpinner,
 } from '@coreui/react'
 
-const API_BASE = 'https://60swqrng-8080.asse.devtunnels.ms/api/v1'
+const API_BASE = '/api/v1'
 
 const DetailApproval = () => {
   const { id } = useParams()
@@ -48,8 +48,8 @@ const DetailApproval = () => {
         const userList = Array.isArray(usersJson)
           ? usersJson
           : Array.isArray(usersJson.data)
-          ? usersJson.data
-          : []
+            ? usersJson.data
+            : []
         setUsers(userList)
 
         const wtRes = await fetch(`${API_BASE}/permit/work-types/${id}`, {
@@ -67,42 +67,42 @@ const DetailApproval = () => {
     fetchData()
   }, [id])
 
- const handleDelete = async () => {
-  if (!window.confirm('Yakin ingin menghapus WorkType ini?')) return;
+  const handleDelete = async () => {
+    if (!window.confirm('Yakin ingin menghapus WorkType ini?')) return;
 
-  try {
-    const token = localStorage.getItem('token');
-    const res = await fetch(`${API_BASE}/permit/work-types/${id}`, {
-      method: 'DELETE',
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    let result = {};
     try {
-      result = await res.json(); // coba parse JSON
-    } catch {
-      result = { error: await res.text() }; // fallback kalau bukan JSON
-    }
+      const token = localStorage.getItem('token');
+      const res = await fetch(`${API_BASE}/permit/work-types/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    if (!res.ok) {
-      // khusus FK error
-      if (String(result.error).includes("foreign key constraint fails")) {
-        alert("❌ WorkType ini masih dipakai di Permit, jadi tidak bisa dihapus.");
-      } else {
-        alert("❌ Gagal menghapus WorkType: " + (result.error || res.statusText));
+      let result = {};
+      try {
+        result = await res.json(); // coba parse JSON
+      } catch {
+        result = { error: await res.text() }; // fallback kalau bukan JSON
       }
-      return;
-    }
 
-    alert("✅ WorkType berhasil dihapus.");
-    navigate("/Approval");
-  } catch (err) {
-    console.error("Delete error:", err);
-    alert("⚠️ Terjadi kesalahan: " + err.message);
-  }finally {
-    setDeleting(false)
+      if (!res.ok) {
+        // khusus FK error
+        if (String(result.error).includes("foreign key constraint fails")) {
+          alert("❌ WorkType ini masih dipakai di Permit, jadi tidak bisa dihapus.");
+        } else {
+          alert("❌ Gagal menghapus WorkType: " + (result.error || res.statusText));
+        }
+        return;
+      }
+
+      alert("✅ WorkType berhasil dihapus.");
+      navigate("/Approval");
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert("⚠️ Terjadi kesalahan: " + err.message);
+    } finally {
+      setDeleting(false)
+    }
   }
-}
 
 
   if (loading) {

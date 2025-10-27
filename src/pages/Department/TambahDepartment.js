@@ -27,7 +27,7 @@ const TambahDepartment = () => {
     try {
       const token = localStorage.getItem('token')
 
-      const response = await fetch('https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/departements', {
+      const response = await fetch('/api/v1/permit/departements', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,8 +60,8 @@ const TambahDepartment = () => {
   }
 
   return (
-     <CContainer className="py-4">
-     <h5 className="fw-bold mb-1">Create new department</h5>
+    <CContainer className="py-4">
+      <h5 className="fw-bold mb-1">Create new department</h5>
       <p className="text-medium-emphasis mb-4">
         On this page, you have the ability to create new department
       </p>

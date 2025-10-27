@@ -19,7 +19,7 @@ import {
   CTableDataCell,
 } from "@coreui/react";
 
-const API_BASE = "https://60swqrng-8080.asse.devtunnels.ms/api/v1";
+const API_BASE = "/api/v1";
 
 const DetailPermit = () => {
   const { id } = useParams();

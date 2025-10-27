@@ -14,7 +14,7 @@ import {
   CSpinner,
 } from '@coreui/react'
 
-const API_BASE = 'https://60swqrng-8080.asse.devtunnels.ms/api/v1'
+const API_BASE = '/api/v1'
 
 const EditApproval = () => {
   const { id } = useParams() // WorkType ID
@@ -51,8 +51,8 @@ const EditApproval = () => {
         const userList = Array.isArray(usersJson)
           ? usersJson
           : Array.isArray(usersJson.data)
-          ? usersJson.data
-          : []
+            ? usersJson.data
+            : []
         setUsers(userList)
 
         // ✅ Fetch work type by ID

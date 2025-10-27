@@ -16,14 +16,14 @@ const Role = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const url = 'https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/roles';
+  const url = '/api/v1/permit/roles';
 
   const getDataRole = async () => {
     try {
-      let token= localStorage.getItem('token')
-      const response = await fetch(url,{
-        headers:{
-          'Authorization':'Bearer '+ token
+      let token = localStorage.getItem('token')
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': 'Bearer ' + token
         }
       });
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
@@ -56,13 +56,13 @@ const Role = () => {
         <CCol>
           <h4 className="fw-bold">Role</h4>
           <p className="text-medium-emphasis">
-            This page provides master data for role 
+            This page provides master data for role
           </p>
         </CCol>
         <CCol className="text-end">
-        <Link to='/TambahRole'>
-          <CButton color="primary">+ Create new Role</CButton>
-        </Link>
+          <Link to='/TambahRole'>
+            <CButton color="primary">+ Create new Role</CButton>
+          </Link>
         </CCol>
       </CRow>
 
@@ -77,37 +77,37 @@ const Role = () => {
                 <th>Action</th>
               </tr>
             </thead>
-<tbody>
- {!loading && roles.length === 0 ? (
-  <tr>
-   <td colSpan="7" className="text-center">
-    Tidak ada data.
-   </td>
-  </tr>
- ) : (
-  roles.map((role) => (
-   <tr key={role.role_id}>
-    <td>{role.role_id}</td>
-    <td>{role.role_name}</td>
-    <td>
-     <Link to={`/DetailRole/${role.id}`}>
-      <button className="btn btn-link text-primary p-0 me-2">Detail</button>
-     </Link>
-     <Link to={`/EditRole/${role.id}`}>
-      <button className="btn btn-link text-primary p-0">Edit</button>
-     </Link>
-    </td>
-   </tr>
-  )) 
- )}
- {error && (
-  <tr>
-   <td colSpan="7" className="text-center text-danger">
-    {error}
-   </td>
-  </tr>
- )}
-</tbody>
+            <tbody>
+              {!loading && roles.length === 0 ? (
+                <tr>
+                  <td colSpan="7" className="text-center">
+                    Tidak ada data.
+                  </td>
+                </tr>
+              ) : (
+                roles.map((role) => (
+                  <tr key={role.role_id}>
+                    <td>{role.role_id}</td>
+                    <td>{role.role_name}</td>
+                    <td>
+                      <Link to={`/DetailRole/${role.id}`}>
+                        <button className="btn btn-link text-primary p-0 me-2">Detail</button>
+                      </Link>
+                      <Link to={`/EditRole/${role.id}`}>
+                        <button className="btn btn-link text-primary p-0">Edit</button>
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              )}
+              {error && (
+                <tr>
+                  <td colSpan="7" className="text-center text-danger">
+                    {error}
+                  </td>
+                </tr>
+              )}
+            </tbody>
           </Table>
         </CCardBody>
       </CCard>

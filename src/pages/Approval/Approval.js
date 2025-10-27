@@ -11,7 +11,7 @@ import {
 } from '@coreui/react'
 import Table from 'react-bootstrap/Table'
 
-const API_BASE = 'https://60swqrng-8080.asse.devtunnels.ms/api/v1'
+const API_BASE = '/api/v1'
 
 export default function ApprovalList() {
   const [data, setData] = useState([])
@@ -58,28 +58,28 @@ export default function ApprovalList() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
 
       const result = await res.json()
-     // langsung array
-if (Array.isArray(result)) {
-  const map = {}
-  result.forEach((u) => {
-    map[u.id] = u.name || u.username // fallback kalau field nya username
-  })
-  setUsers(map)
-} else if (Array.isArray(result.data)) {
-  const map = {}
-  result.data.forEach((u) => {
-    map[u.id] = u.name || u.username
-  })
-  setUsers(map)
-} else if (Array.isArray(result.users)) {
-  const map = {}
-  result.users.forEach((u) => {
-    map[u.id] = u.name || u.username
-  })
-  setUsers(map)
-} else {
-  setError('Format data users tidak sesuai backend')
-}
+      // langsung array
+      if (Array.isArray(result)) {
+        const map = {}
+        result.forEach((u) => {
+          map[u.id] = u.name || u.username // fallback kalau field nya username
+        })
+        setUsers(map)
+      } else if (Array.isArray(result.data)) {
+        const map = {}
+        result.data.forEach((u) => {
+          map[u.id] = u.name || u.username
+        })
+        setUsers(map)
+      } else if (Array.isArray(result.users)) {
+        const map = {}
+        result.users.forEach((u) => {
+          map[u.id] = u.name || u.username
+        })
+        setUsers(map)
+      } else {
+        setError('Format data users tidak sesuai backend')
+      }
     } catch (err) {
       console.error('Fetch error:', err)
       setError('Gagal mengambil data users dari server')
@@ -150,7 +150,7 @@ if (Array.isArray(result)) {
                         <button className="btn btn-link p-0 me-2">Detail</button>
                       </Link>
                       <Link to={`/EditApproval/${item.id}`}>
-                         <button className="btn btn-link p-0">Edit</button>
+                        <button className="btn btn-link p-0">Edit</button>
                       </Link>
                     </td>
                   </tr>

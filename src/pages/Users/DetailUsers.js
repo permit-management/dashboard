@@ -17,7 +17,7 @@ const DetailUsers = () => {
     const fetchUserDetail = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/users/${id}`, {
+        const res = await fetch(`/api/v1/permit/users/${id}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -38,8 +38,8 @@ const DetailUsers = () => {
   }, [id]);
 
   const handleEdit = () => {
-  navigate(`/EditUsers/${id}`);
- };
+    navigate(`/EditUsers/${id}`);
+  };
 
   const handleBack = () => {
     navigate('/Users');
@@ -51,7 +51,7 @@ const DetailUsers = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/users/${id}`, {
+      const res = await fetch(`/api/v1/permit/users/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

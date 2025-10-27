@@ -31,9 +31,9 @@ const EditUser = () => {
     const fetchData = async () => {
       try {
         const [userRes, rolesRes, deptRes] = await Promise.all([
-          axios.get(`https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/users/${id}`, config),
-          axios.get(`https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/roles`, config),
-          axios.get(`https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/departements`, config),
+          axios.get(`/api/v1/permit/users/${id}`, config),
+          axios.get(`/api/v1/permit/roles`, config),
+          axios.get(`/api/v1/permit/departements`, config),
         ])
 
         const userData = userRes.data
@@ -85,7 +85,7 @@ const EditUser = () => {
       }
 
       await axios.put(
-        `https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/users/${id}`,
+        `/api/v1/permit/users/${id}`,
         payload,
         config
       )

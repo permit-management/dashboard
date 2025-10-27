@@ -23,7 +23,7 @@ const EditDepartment = () => {
     const fetchDepartment = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/departements/${id}`, {
+        const response = await fetch(`/api/v1/permit/departements/${id}`, {
           headers: {
             'Authorization': 'Bearer ' + token
           }
@@ -60,7 +60,7 @@ const EditDepartment = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/departements/${id}`, {
+      const response = await fetch(`/api/v1/permit/departements/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

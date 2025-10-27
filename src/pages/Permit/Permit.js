@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import { Link } from "react-router-dom";  
+import { Link } from "react-router-dom";
 import {
   CCard,
   CCardBody,
@@ -14,7 +14,7 @@ import {
   CAlert,
 } from "@coreui/react";
 
-const API_BASE = "https://60swqrng-8080.asse.devtunnels.ms/api/v1";
+const API_BASE = "/api/v1";
 
 const statusColors = {
   "In Progress": "secondary",
@@ -79,9 +79,8 @@ const Permit = () => {
           height: "8px",
           borderRadius: "50%",
           display: "inline-block",
-          backgroundColor: `var(--cui-${
-            statusColors[status] || "secondary"
-          })`,
+          backgroundColor: `var(--cui-${statusColors[status] || "secondary"
+            })`,
         }}
       ></span>
       {status}
@@ -104,9 +103,8 @@ const Permit = () => {
         {["In Progress", "Active", "Rejected", "Expired"].map((status) => (
           <CCol key={status}>
             <CCard
-              className={`border-start-4 border-start-${
-                statusColors[status]
-              } bg-light`}
+              className={`border-start-4 border-start-${statusColors[status]
+                } bg-light`}
             >
               <CCardBody className="py-3">
                 <h4 className="fw-bold mb-1">
@@ -193,11 +191,11 @@ const Permit = () => {
                     <td>{item.work_name || "-"}</td>
                     <td>{renderStatus(item.status || "In Progress")}</td>
                     <td>
-                    <Link to={`/DetailPermit/${item.id}`}>  
-                      <button className="btn btn-link text-primary p-0">
-                        Detail
-                      </button>
-                    </Link>  
+                      <Link to={`/DetailPermit/${item.id}`}>
+                        <button className="btn btn-link text-primary p-0">
+                          Detail
+                        </button>
+                      </Link>
                     </td>
                   </tr>
                 ))

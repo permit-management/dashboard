@@ -41,14 +41,14 @@ const MyForm = () => {
       return
     }
 
-    axios.get('https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/roles', config)
+    axios.get('/api/v1/permit/roles', config)
       .then((res) => {
         const data = Array.isArray(res.data) ? res.data : res.data.data || []
         setRoles(data)
       })
       .catch((err) => console.error('Error fetching roles:', err))
 
-    axios.get('https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/departements', config)
+    axios.get('/api/v1/permit/departements', config)
       .then((res) => {
         const data = Array.isArray(res.data) ? res.data : res.data.data || []
         setDepartments(data)
@@ -87,7 +87,7 @@ const MyForm = () => {
       console.log('Payload:', payload)
 
       await axios.post(
-        'https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/users',
+        '/api/v1/permit/users',
         payload,
         config
       )

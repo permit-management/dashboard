@@ -11,7 +11,7 @@ const Department = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const url = 'https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/departements';
+  const url = '/api/v1/permit/departements';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,12 +75,12 @@ const Department = () => {
                     <td>{departments.departements_id}</td>
                     <td>{departments.departements_name}</td>
                     <td>
-                    <Link to={`/DetailDepartment/${departments.id}`}>
-                      <button className="btn btn-link p-0 me-2">Detail</button>
-                    </Link>
-                    <Link to={`/EditDepartment/${departments.id}`}>
-                      <button className="btn btn-link p-0">Edit</button>
-                    </Link>
+                      <Link to={`/DetailDepartment/${departments.id}`}>
+                        <button className="btn btn-link p-0 me-2">Detail</button>
+                      </Link>
+                      <Link to={`/EditDepartment/${departments.id}`}>
+                        <button className="btn btn-link p-0">Edit</button>
+                      </Link>
                     </td>
                   </tr>
                 ))

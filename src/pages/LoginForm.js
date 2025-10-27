@@ -12,7 +12,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/auth/login', { 
+      const res = await fetch('/api/v1/permit/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

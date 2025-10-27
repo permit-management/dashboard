@@ -13,17 +13,17 @@ import {
 
 const Users = () => {
   const [users, setUsers] = useState([]);
- const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const url = 'https://60swqrng-8080.asse.devtunnels.ms/api/v1/permit/users';
+  const url = '/api/v1/permit/users';
 
   const getDataUsers = async () => {
     try {
-      let token= localStorage.getItem('token')
-      const response = await fetch(url,{
-        headers:{
-          'Authorization':'Bearer '+ token
+      let token = localStorage.getItem('token')
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': 'Bearer ' + token
         }
       });
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
@@ -60,9 +60,9 @@ const Users = () => {
           </p>
         </CCol>
         <CCol className="text-end">
-        <Link to="/TambahUsers"> 
-          <CButton color="primary">+ Create new user</CButton>
-        </Link>
+          <Link to="/TambahUsers">
+            <CButton color="primary">+ Create new user</CButton>
+          </Link>
         </CCol>
       </CRow>
 

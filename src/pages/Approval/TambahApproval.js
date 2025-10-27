@@ -6,7 +6,7 @@ import {
   CForm, CFormLabel, CFormInput, CFormSelect, CButton,
 } from '@coreui/react'
 
-const API_BASE = 'https://60swqrng-8080.asse.devtunnels.ms/api/v1' // sesuaikan kalau perlu
+const API_BASE = '/api/v1' // sesuaikan kalau perlu
 
 export default function CreateApprovalSetting() {
   const navigate = useNavigate()
@@ -85,7 +85,7 @@ export default function CreateApprovalSetting() {
 
       if (!response.ok) {
         let text = await response.text()
-        try { const j = JSON.parse(text); text = j.error || j.message || JSON.stringify(j) } catch (_) {}
+        try { const j = JSON.parse(text); text = j.error || j.message || JSON.stringify(j) } catch (_) { }
         throw new Error(`HTTP ${response.status} - ${text}`)
       }
 
