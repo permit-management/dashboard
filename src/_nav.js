@@ -20,16 +20,16 @@ import {
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
-  {
-    component: CNavItem,
-    name: 'Dashboard',
-    to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Dashboard',
+  //   to: '/dashboard',
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
+  //     text: 'NEW',
+  //   },
+  // },
   {
     component: CNavTitle,
     name: 'Master',
@@ -42,59 +42,59 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Users',
-        to:'/Users',
+        to: '/Users',
       },
       {
         component: CNavItem,
         name: 'Department',
-        to:'/Department',
+        to: '/Department',
       },
       {
         component: CNavItem,
         name: 'Role',
-        to:'/Role',
+        to: '/Role',
       },
     ],
   },
   {
-    component: CNavTitle,
-    name: 'Extras',
+    component: CNavItem,
+    name: 'Approval',
+    to: '/Approval',
+    icon: <CIcon icon={cilFile} customClassName="nav-icon" />,
   },
   {
-        component: CNavItem,
-        name: 'Approval',
-        to: '/Approval',
-        icon: <CIcon icon={cilFile} customClassName="nav-icon" />,
-      },
-      {
-        component: CNavItem,
-        name: 'Permit',
-        to: '/Permit',
-        icon: <CIcon icon={cilFile} customClassName="nav-icon" />,
-      },
-  {
-    component: CNavGroup,
-    name: 'Pages',
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'LoginForm',
-        to: '/LoginForm',
-      },
-      {
-        component: CNavItem,
-        name: 'RegisterForm',
-        to: '/RegisterForm',
-      },
-      {
-        component: CNavItem,
-        name: 'WellcomeForm',
-        to: '/WellcomeForm',
-      },
-      
-    ],
+    component: CNavItem,
+    name: 'Permit',
+    to: '/Permit',
+    icon: <CIcon icon={cilFile} customClassName="nav-icon" />,
   },
+  // {
+  //   component: CNavTitle,
+  //   name: 'Extras',
+  // },
+  // {
+  //   component: CNavGroup,
+  //   name: 'Pages',
+  //   icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: 'LoginForm',
+  //       to: '/LoginForm',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'RegisterForm',
+  //       to: '/RegisterForm',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'WellcomeForm',
+  //       to: '/WellcomeForm',
+  //     },
+
+  //   ],
+  // },
 ]
 
 export default _nav

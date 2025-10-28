@@ -47,16 +47,17 @@ const DetailPermit = () => {
 
       if (custodianIds.length > 0) {
         const custodianPromises = custodianIds.map((cid) =>
-          fetch(`${API_BASE}permit/users/${cid}`, {
+          fetch(`${API_BASE}/permit/users/${cid}`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           })
             .then((res) => (res.ok ? res.json() : null))
-            .then((data) => data?.data || null)
+            .then((data) => data || null)
             .catch(() => null)
         );
         const custodianData = await Promise.all(custodianPromises);
+        console.log("Custodian Data:", custodianData);
         setCustodians(custodianData.filter((c) => c !== null));
       }
     } catch (err) {

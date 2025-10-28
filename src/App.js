@@ -22,6 +22,8 @@ const Register = React.lazy(() => import('./views/pages/register/Register'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 const LoginForm = React.lazy(() => import('./pages/LoginForm'))
 const RegisterForm = React.lazy(() => import('./pages/RegisterForm'))
+const WellcomeForm = React.lazy(() => import('./pages/WellcomeForm'))
+const Contractor = React.lazy(() => import('./pages/Contractor'))
 
 const App = () => {
   const { isColorModeSet, setColorMode } = useColorModes('coreui-free-react-admin-template-theme')
@@ -91,6 +93,22 @@ const App = () => {
                 <PublicRoute>
                   <RegisterForm />
                 </PublicRoute>
+              }
+            />
+            <Route
+              exact
+              path='/Submit'
+              name='WelcomeForm'
+              element={
+                <WellcomeForm />
+              }
+            />
+            <Route
+              exact
+              path='/Contractor'
+              name='Contractor'
+              element={
+                <Contractor />
               }
             />
 

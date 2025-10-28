@@ -22,7 +22,7 @@ import {
   CAlert,
 } from "@coreui/react"
 
-const API_BASE = "/api/v1"
+const API_BASE = "/api"
 
 const PermitForm = () => {
   const token = localStorage.getItem("token")
@@ -252,7 +252,7 @@ const PermitForm = () => {
               </CCol>
             </CRow>
 
-            <CRow className="mt-3">
+            {/* <CRow className="mt-3">
               <CCol>
                 <CFormLabel>Custodian 1</CFormLabel>
                 <CFormInput value={custodians.approval_1_name} disabled />
@@ -265,7 +265,7 @@ const PermitForm = () => {
                 <CFormLabel>Custodian 3</CFormLabel>
                 <CFormInput value={custodians.approval_3_name} disabled />
               </CCol>
-            </CRow>
+            </CRow> */}
 
             <CRow className="mb-3">
               <CCol md={6}>

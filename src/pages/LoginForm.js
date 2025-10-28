@@ -42,8 +42,6 @@ const LoginForm = () => {
           // Update auth context
           login(data.token, data.user);
 
-          alert('Login berhasil!');
-
           // Navigate to intended destination or dashboard
           navigate(from, { replace: true });
         } else {
