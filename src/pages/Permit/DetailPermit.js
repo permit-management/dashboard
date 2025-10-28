@@ -28,6 +28,9 @@ const DetailPermit = () => {
   const [custodians, setCustodians] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [workDates, setWorkDates] = useState([]);
+  const [checkins, setCheckins] = useState([]);
+  const [incidents, setIncidents] = useState([]);
 
   // 🔹 Fetch detail permit
   const fetchPermitDetail = async () => {
@@ -39,10 +42,51 @@ const DetailPermit = () => {
       });
       if (!response.ok) throw new Error("Gagal fetch data permit");
       const result = await response.json();
-      setPermit(result.data);
+      let permit = result.data;
+
+      let workDates = [];
+      const startDate = new Date(permit.working_start);
+      const endDate = new Date(permit.working_end);
+      for (
+        let d = startDate;
+        d <= endDate;
+        d.setDate(d.getDate() + 1)
+      ) {
+        workDates.push(new Date(d));
+      }
+      setWorkDates(workDates);
+
+      let checkins = [];
+      result.data.checkins.forEach((checkin) => {
+        let worker = checkins.find((c) => c.nik === checkin.nik);
+        if (!worker) {
+          checkins.push({
+            nik: checkin.nik,
+            worker_name: checkin.worker_name,
+            checkins: [
+              {
+                date: checkin.date,
+                status: checkin.status,
+                photo_url: checkin.photo_url,
+              },
+            ],
+          });
+        } else {
+          worker.checkins.push({
+            date: checkin.date,
+            status: checkin.status,
+            photo_url: checkin.photo_url,
+          });
+        }
+      });
+      setCheckins(checkins);
+
+      setIncidents(result.data.incidents || []);
+
+      setPermit(permit);
 
       // 🔹 Ambil data custodian berdasarkan approval di work_type
-      const { approval_1, approval_2, approval_3 } = result.data.work_type || {};
+      const { approval_1, approval_2, approval_3 } = permit.work_type || {};
       const custodianIds = [approval_1, approval_2, approval_3].filter(Boolean);
 
       if (custodianIds.length > 0) {
@@ -281,38 +325,38 @@ const DetailPermit = () => {
       <CCard className="mb-5 shadow-sm">
         <CCardHeader className="fw-semibold">Daily Check-In</CCardHeader>
         <CCardBody>
-          <CTable bordered>
-            <CTableHead>
-              <CTableRow>
-                <CTableHeaderCell>Worker Name</CTableHeaderCell>
-                <CTableHeaderCell>10/02/25</CTableHeaderCell>
-                <CTableHeaderCell>11/02/25</CTableHeaderCell>
-                <CTableHeaderCell>12/02/25</CTableHeaderCell>
-              </CTableRow>
-            </CTableHead>
-            <CTableBody>
-              {permit.workers?.map((worker, idx) => (
-                <CTableRow key={idx}>
-                  <CTableDataCell>{worker.name}</CTableDataCell>
-                  <CTableDataCell>
-                    <a href="#" className="text-primary">
-                      check
-                    </a>
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    <a href="#" className="text-primary">
-                      check
-                    </a>
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    <a href="#" className="text-primary">
-                      check
-                    </a>
-                  </CTableDataCell>
+          <div style={{ 'overflow': 'auto' }}>
+            <CTable bordered>
+              <CTableHead>
+                <CTableRow>
+                  <CTableHeaderCell>Worker Name</CTableHeaderCell>
+                  {workDates.map((date, idx) => (
+                    <CTableHeaderCell key={idx}>
+                      {date.toLocaleDateString()}
+                    </CTableHeaderCell>
+                  ))}
                 </CTableRow>
-              ))}
-            </CTableBody>
-          </CTable>
+              </CTableHead>
+              <CTableBody>
+                {checkins?.map((checkin, idx) => (
+                  <CTableRow key={idx}>
+                    <CTableDataCell>{checkin.worker_name}</CTableDataCell>
+                    {workDates.map((date, idx) => (
+                      <CTableDataCell key={idx}>
+                        {checkin.checkins.find((c => new Date(c.date).toDateString() === date.toDateString())) ? (
+                          <a target="_blank" href={checkin.checkins.find(c => new Date(c.date).toDateString() === date.toDateString()).photo_url} className="text-primary">
+                            check
+                          </a>
+                        ) : (
+                          <span className="text-danger">❌</span>
+                        )}
+                      </CTableDataCell>
+                    ))}
+                  </CTableRow>
+                ))}
+              </CTableBody>
+            </CTable>
+          </div>
           <div className="d-flex justify-content-end mt-3">
             <CButton color="secondary" onClick={() => navigate(-1)}>
               Back
@@ -323,6 +367,41 @@ const DetailPermit = () => {
           </div>
         </CCardBody>
       </CCard>
+
+
+      {/* Incident */}
+      <CCard className="mb-5 shadow-sm">
+        <CCardHeader className="fw-semibold">Incident Report</CCardHeader>
+        <CCardBody>
+          <div style={{ 'overflow': 'auto' }}>
+            <CTable bordered>
+              <CTableHead>
+                <CTableRow>
+                  <CTableHeaderCell>Date</CTableHeaderCell>
+                  <CTableHeaderCell >
+                    Photo
+                  </CTableHeaderCell>
+                  <CTableHeaderCell>Description</CTableHeaderCell>
+                </CTableRow>
+              </CTableHead>
+              <CTableBody>
+                {incidents?.map((incident, idx) => (
+                  <CTableRow key={idx}>
+                    <CTableDataCell>{new Date(incident.date).toLocaleDateString()}</CTableDataCell>
+                    <CTableDataCell>
+                      <a target="_blank" href={incident.photo} className="text-primary">
+                        check
+                      </a>
+                    </CTableDataCell>
+                    <CTableDataCell>{incident.description}</CTableDataCell>
+                  </CTableRow>
+                ))}
+              </CTableBody>
+            </CTable>
+          </div>
+        </CCardBody>
+      </CCard>
+
     </CContainer>
   );
 };

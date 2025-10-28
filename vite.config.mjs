@@ -47,6 +47,11 @@ export default defineConfig(() => {
           changeOrigin: true,
           secure: false, // penting agar bypass SSL DevTunnel
         },
+        '/uploads': {
+          target: 'https://permit.infinitelab.my.id/',
+          changeOrigin: true,
+          secure: false, // penting agar bypass SSL DevTunnel
+        },
       },
     },
   }
